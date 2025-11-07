@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Javascript Exercise #1</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        margin: 40px;
+      }
+      h1 { 
+        color: #333; 
+      }
+      textarea {
+        width: 100%;
+        height: 180px;
+        font-family: monospace;
+        font-size: 14px;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        margin: 8px 4px;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+      button:hover { background: #0056b3; }
+      pre {
+        background: #eee;
+        padding: 8px;
+        border-radius: 6px;
+      }
+      #output {
+        margin-top: 20px; 
+        font-weight: bold; 
+      }
+      #progress { 
+        margin-bottom: 10px; 
+        font-weight: bold; 
+      }
+      #grade { 
+        margin-bottom: 10px; 
+        font-weight: bold; 
+        color: #007bff; 
+      }
+      #challengeList { 
+        margin-bottom: 15px; 
+      }
+      .challengeItem {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 3px;
+        border-radius: 6px;
+        background: #ddd;
+        cursor: pointer;
+      }
+      .challengeItem.active {
+        background: #007bff;
+        color: white;
+      }
+      .challengeItem.completed {
+        background: #28a745;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+
+  <h1 id="title">
+    Challenge Title
+  </h1>
+  <p id="description">
+    Challenge description goes here.
+  </p>
+
+  <div id="progress"></div>
+  <div id="grade"></div>
+  <div id="challengeList"></div>
+
+  <textarea id="code"></textarea><br>
+
+  <button onclick="runCode()">
+    Run Tests
+  </button>
+  <button onclick="prevChallenge()">
+    ◀ Previous
+  </button>
+  <button onclick="nextChallenge()">
+    Next ▶
+  </button>
+
+  <div id="output"></div>
+
+    <script>
+    const challenges = [
+      {
+        id: 1,
+        title: "Sum of Two Numbers",
+        description: "Write a function <code>sum(a, b)</code> that returns the sum of two numbers.",
+        starter: "function sum(a, b) {\n  // Your code here\n  return a + b;\n}",
+        functionName: "sum",
+        tests: [
+          { input: [2, 3], expected: 5 },
+          { input: [-1, 5], expected: 4 },
+          { input: [10, 20], expected: 30 }
+        ]
+      },
+      {
+        id: 2,
+        title: "Return the First Element",
+        description: "Write a function <code>getFirst(arr)</code> that returns the first element of an array.",
+        starter: "function getFirst(arr) {\n  // Your code here\n  return arr[0];\n}",
+        functionName: "getFirst",
+        tests: [
+          { input: [[1, 2, 3]], expected: 1 },
+          { input: [[10, 20, 30]], expected: 10 },
+          { input: [[5]], expected: 5 }
+        ]
+      },
+      {
+        id: 3,
+        title: "Reverse a String",
+        description: "Write a function <code>reverseString(str)</code> that returns the reversed string.",
+        starter: "function reverseString(str) {\n  // Your code here\n  return str.split('').reverse().join('');\n}",
+        functionName: "reverseString",
+        tests: [
+          { input: ["hello"], expected: "olleh" },
+          { input: ["abc"], expected: "cba" },
+          { input: ["!123"], expected: "321!" }
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+    let completed = {}; // completed challenges
+    let testResults = {}; // total amount of cleared test cases
+
+    //calculate totals
+    function totalTests() {
+      return challenges.reduce((sum, ch) => sum + ch.tests.length, 0);
+    }
+    function totalPassed() {
+      return Object.values(testResults).reduce((sum, n) => sum + n, 0);
+    }
+
+    //load exercise on the challenge array
+    function loadChallenge(index) {
+      const challenge = challenges[index];
+      document.getElementById("title").innerHTML = challenge.title;
+      document.getElementById("description").innerHTML = challenge.description;
+      document.getElementById("code").value = challenge.starter;
+      document.getElementById("output").innerHTML = "";
+      updateProgress();
+      renderChallengeList();
+      showVisibleTests(challenge);
+    }
+
+    //show test cases and expected results
+    function showVisibleTests(challenge) {
+      const outputDiv = document.getElementById("output");
+      let html = `<h3>Test Cases:</h3>`;
+      challenge.tests.forEach((t, i) => {
+        html += `<pre>Test ${i+1}: Input: ${JSON.stringify(t.input)} | Expected: ${JSON.stringify(t.expected)}</pre>`;
+      });
+      outputDiv.innerHTML = html;
+    }
+
+    //run the code given, check the test cases, update counters according to how many were cleared
+    function runCode() {
+      const challenge = challenges[currentIndex];
+      const code = document.getElementById("code").value;
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = `<h3>Test Results:</h3>`;
+
+      let passedCount = 0;
+      try {
+        const func = new Function(code + `; return ${challenge.functionName};`)();
+        for (const t of challenge.tests) {
+          const result = func(...t.input);
+          const pass = result === t.expected;
+          if (pass) passedCount++;
+          outputDiv.innerHTML += `<pre style="color:${pass ? 'green' : 'red'}">${t.input.join(', ')} ➜ ${result} (${pass ? '✅' : '❌ expected ' + t.expected})</pre>`;
+        }
+
+        outputDiv.innerHTML += `<p><strong>${passedCount} / ${challenge.tests.length} tests passed.</strong></p>`;
+        testResults[challenge.id] = passedCount; // save partial progress
+
+        //mark as completed if all tests pass
+        if (passedCount === challenge.tests.length) {
+          completed[challenge.id] = true;
+        } else {
+          delete completed[challenge.id];
+        }
+
+        updateProgress();
+        renderChallengeList();
+      } catch (e) {
+        outputDiv.innerHTML = `<pre style="color:red;">Error: ${e.message}</pre>`;
+      }
+    }
+
+    //move between challenges in the index
+    function nextChallenge() {
+      currentIndex = (currentIndex + 1) % challenges.length;
+      loadChallenge(currentIndex);
+    }
+    function prevChallenge() {
+      currentIndex = (currentIndex - 1 + challenges.length) % challenges.length;
+      loadChallenge(currentIndex);
+    }
+
+    //update progress and grade totals
+    function updateProgress() {
+      const doneCount = Object.keys(completed).length;
+      const total = challenges.length;
+      const gradeText = `Total Grade: ${totalPassed()} / ${totalTests()} tests passed`;
+      document.getElementById("progress").innerText = `Challenges Completed: ${doneCount} / ${total}`;
+      document.getElementById("grade").innerText = gradeText;
+    }
+
+    //navigating between challenges
+    function renderChallengeList() {
+      const listDiv = document.getElementById("challengeList");
+      listDiv.innerHTML = "";
+      challenges.forEach((ch, i) => {
+        const span = document.createElement("span");
+        span.innerText = ch.title;
+        span.className = "challengeItem";
+        if (i === currentIndex) span.classList.add("active");
+        if (completed[ch.id]) span.classList.add("completed");
+        span.onclick = () => { currentIndex = i; loadChallenge(i); };
+        listDiv.appendChild(span);
+      });
+    }
+
+    loadChallenge(0);
+    </script>
+
+  </body>
+</html>
