@@ -92,9 +92,16 @@
     Next ▶
   </button>
 
+  <label>
+  Student Name:
+  <input type="text" id="studentName" placeholder="Enter your name">
+  </label>
+  <button onclick="submitScore()">Submit Final Score</button>
+
   <div id="output"></div>
 
     <script>
+
     const challenges = [
       {
         id: 1,
@@ -135,8 +142,8 @@
     ];
 
     let currentIndex = 0;
-    let completed = {}; // completed challenges
-    let testResults = {}; // total amount of cleared test cases
+    let completed = {}; //completed challenges
+    let testResults = {}; //total amount of cleared test cases
 
     //calculate totals
     function totalTests() {
@@ -234,6 +241,27 @@
         span.onclick = () => { currentIndex = i; loadChallenge(i); };
         listDiv.appendChild(span);
       });
+    }
+
+    function submitScore() {
+      const name = document.getElementById("studentName").value.trim();
+      const score = `${totalPassed()} / ${totalTests()}`;
+
+      if (!name) {
+        alert("Please enter your name before submitting.");
+        return;
+      }
+
+      const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSeuvAaQIEddQ3weuwRSRzRvLKFYvYCJuWfcYoEmMDJ9FumquQ/formResponse?";
+      const nameEntry = "entry.842400589";  // ← your Name field ID
+      const scoreEntry = "entry.1474438198"; // ← your Score field ID
+
+      const submitURL =
+        `${formURL}${nameEntry}=${encodeURIComponent(name)}&${scoreEntry}=${encodeURIComponent(score)}`;
+
+      fetch(submitURL, { method: "POST", mode: "no-cors" })
+        .then(() => alert(" Score submitted!"))
+        .catch(() => alert(" Failed to submit score."));
     }
 
     loadChallenge(0);
