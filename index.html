@@ -67,7 +67,17 @@
       }
     </style>
   </head>
-  <body>
+  <body>  
+
+  <h1>
+    Javascript Exercise #1
+  </h1>
+    
+  <label>
+    Student Name:
+  <input type="text" id="studentName" placeholder="Enter your name">
+  </label>
+  <button onclick="submitScore()">Submit Final Score</button>
 
   <h1 id="title">
     Challenge Title
@@ -92,11 +102,7 @@
     Next ▶
   </button>
 
-  <label>
-  Student Name:
-  <input type="text" id="studentName" placeholder="Enter your name">
-  </label>
-  <button onclick="submitScore()">Submit Final Score</button>
+
 
   <div id="output"></div>
 
@@ -253,8 +259,8 @@
       }
 
       const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSeuvAaQIEddQ3weuwRSRzRvLKFYvYCJuWfcYoEmMDJ9FumquQ/formResponse?";
-      const nameEntry = "entry.842400589";  // ← your Name field ID
-      const scoreEntry = "entry.1474438198"; // ← your Score field ID
+      const nameEntry  = "entry.842400589";
+      const scoreEntry = "entry.1474438198";
 
       const submitURL =
         `${formURL}${nameEntry}=${encodeURIComponent(name)}&${scoreEntry}=${encodeURIComponent(score)}`;
