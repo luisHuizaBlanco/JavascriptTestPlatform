@@ -161,12 +161,22 @@
     let completed = {}; //completed challenges
     let testResults = {}; //total amount of cleared test cases
 
+    challenges.forEach(ch => {
+      if (!Array.isArray(testResults[`cases_${ch.id}`])) {
+        testResults[`cases_${ch.id}`] = new Array(ch.tests.length).fill(false);
+      }
+    });
+
     //calculate totals
     function totalTests() {
       return challenges.reduce((sum, ch) => sum + ch.tests.length, 0);
     }
     function totalPassed() {
-      return Object.values(testResults).reduce((sum, n) => sum + n, 0);
+      return challenges.reduce((total, ch) => {
+        const arr = testResults[`cases_${ch.id}`];
+        if (!Array.isArray(arr)) return total;
+        return total + arr.reduce((s, passed) => s + (passed ? 1 : 0), 0);
+      }, 0);
     }
 
     //load exercise on the challenge array
