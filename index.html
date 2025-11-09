@@ -111,48 +111,48 @@
     const challenges = [
       {
         id: 1,
-        title: "Sum of Two Numbers",
-        description: "Write a function <code>sum(a, b)</code> that returns the sum of two numbers.",
-        starter: "function sum(a, b) {\n  // Your code here\n  return a + b;\n}",
-        functionName: "sum",
+        title: "Math Operators",
+        description: "Write a function <code>plustwosquared(a)</code> that returns the number the square of number <code>a</code> + 2.<br><br>Perform the addition of two to number <code>a</code> before multiplying a by itself.<br><br>In use here: <br>Variable Assignment: = <br>Math Operators: +, -, *, /<br><br>Example: <code>plustwosquared(5)</code> -> Output: 49",
+        starter: "function plustwosquared(a) {\n  // Your code here\n  \n}",
+        functionName: "plustwosquared",
         tests: [
-          { input: [2, 3], expected: 5 },
-          { input: [-1, 5], expected: 4 }
+          { input: [3], expected: 25 },
+          { input: [7], expected: 81 }
         ]
       },
       {
         id: 2,
-        title: "Sum of Two Numbers",
-        description: "Write a function <code>sub(a, b)</code> that returns the subtraction of two numbers.",
-        starter: "function sub(a, b) {\n  // Your code here\n  return a - b;\n}",
-        functionName: "sub",
+        title: "Reverse the Boolean",
+        description: "Write a function <code>reverse(a)</code> that when given boolean <code>a</code>, returns the opposite value of <code>a</code>. <br><br> That means, if boolean a is <code>true</code>, it should return <code>false</code>, and if a is <code>false</code>, it should return <code>true</code>.<br><br>In use here: <br>Conditionals: if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>reverse(true)</code> -> Output: false",
+        starter: "function reverse(a) {\n  // Your code here\n  \n}",
+        functionName: "reverse",
         tests: [
-          { input: [2, 3], expected: -1 },
-          { input: [-1, 5], expected: -6 }
+          { input: [true], expected: false },
+          { input: [false], expected: true }
         ]
       },
       {
         id: 3,
-        title: "Return the First Element",
-        description: "Write a function <code>getFirst(arr)</code> that returns the first element of an array.",
-        starter: "function getFirst(arr) {\n  // Your code here\n  return arr[0];\n}",
-        functionName: "getFirst",
+        title: "Check the Temperature",
+        description: "Write a function <code>checktemp(temp)</code> that when given a variable <code>temp</code>, returns <code>false</code> if the temperature is either more than 80, or either equal to or less than 70, otherwise it should return <code>true</code>.<br><br> This exercise is all about proper use of conditionals and logical comparison.<br><br>In use here: <br>Conditionals: if, else if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>checktemp(90)</code> -> Output: false",
+        starter: "function checktemp(temp) {\n  // Your code here\n  \n}",
+        functionName: "checktemp",
         tests: [
-          { input: [[1, 2, 3]], expected: 1 },
-          { input: [[10, 20, 30]], expected: 10 },
-          { input: [[5]], expected: 5 }
+          { input: [81], expected: false },
+          { input: [70], expected: false },
+          { input: [71], expected: true }
         ]
       },
       {
         id: 4,
-        title: "Reverse a String",
-        description: "Write a function <code>reverseString(str)</code> that returns the reversed string.",
-        starter: "function reverseString(str) {\n  // Your code here\n  return str.split('').reverse().join('');\n}",
-        functionName: "reverseString",
+        title: "Sum from 1 to N",
+        description: "Write a function <code>triangular(n)</code> that when given a variable <code>n</code>, returns the sum of the numbers from 1 to <code>n</code> (Known a triangular number).<br><br> You are going to need loops for this one, the idea is similar to the exercise we did to get the cube of a number.<br><br>In use here: <br>Loops: for(let i = 0; i < [number of loops you want]; i++) {}<br>Variable Assignment: =<br>Math Operators: +, -, *, /<br><br>Example: <code>triangular(3)</code> -> Output: 6",        starter: "function reverseString(str) {\n  // Your code here\n  return str.split('').reverse().join('');\n}",
+        starter: "function triangular(n) {\n  // Your code here\n  \n}",
+        functionName: "triangular",
         tests: [
-          { input: ["hello"], expected: "olleh" },
-          { input: ["abc"], expected: "cba" },
-          { input: ["!123"], expected: "321!" }
+          { input: [4], expected: 10 },
+          { input: [5], expected: 15 },
+          { input: [9], expected: 45 }
         ]
       }
     ];
