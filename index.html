@@ -12,6 +12,11 @@
       h1 { 
         color: #333; 
       }
+      code {
+        font-family: Arial, sans-serif;
+        color: #1500ff;
+        font-size: 16px;
+      }
       textarea {
         width: 100%;
         height: 180px;
@@ -112,19 +117,19 @@
       {
         id: 1,
         title: "Math Operators",
-        description: "Write a function <code>plustwosquared(a)</code> that returns the number the square of number <code>a</code> + 2.<br><br>Perform the addition of two to number <code>a</code> before multiplying a by itself.<br><br>In use here: <br>Variable Assignment: = <br>Math Operators: +, -, *, /<br><br>Example: <code>plustwosquared(5)</code> -> Output: 49",
-        starter: "function plustwosquared(a) {\n  // Your code here\n  \n}",
-        functionName: "plustwosquared",
+        description: "In the function <code>squared(n)</code> below, write code so that it returns square of a number <code>n</code>.<br><br>If you don't know, the square of a number <code>n</code> is <code>n</code> times <code>n</code>.<br><br>To solve this, use: <br>Functions: return <br>Math Operators: +, -, *, /<br><br>Example: <code>squared(2)</code> -> Output: 4",
+        starter: "function squared(n) {\n  // Your code in the line below\n  \n}",
+        functionName: "squared",
         tests: [
-          { input: [3], expected: 25 },
-          { input: [7], expected: 81 }
+          { input: [5], expected: 25 },
+          { input: [9], expected: 81 }
         ]
       },
       {
         id: 2,
         title: "Reverse the Boolean",
-        description: "Write a function <code>reverse(a)</code> that when given boolean <code>a</code>, returns the opposite value of <code>a</code>. <br><br> That means, if boolean a is <code>true</code>, it should return <code>false</code>, and if a is <code>false</code>, it should return <code>true</code>.<br><br>In use here: <br>Conditionals: if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>reverse(true)</code> -> Output: false",
-        starter: "function reverse(a) {\n  // Your code here\n  \n}",
+        description: "In the function <code>reverse(bool)</code> that when given boolean <code>bool</code>, returns the opposite value of <code>bool</code>. <br><br> That means, if bool is <code>true</code>, it should return <code>false</code>, and if bool is <code>false</code>, it should return <code>true</code>.<br><br>To solve this, use: <br>Conditionals: if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>reverse(true)</code> -> Output: false",
+        starter: "function reverse(bool) {\n  // Your code in the line below\n  \n}",
         functionName: "reverse",
         tests: [
           { input: [true], expected: false },
@@ -135,7 +140,7 @@
         id: 3,
         title: "Check the Temperature",
         description: "Write a function <code>checktemp(temp)</code> that when given a variable <code>temp</code>, returns <code>false</code> if the temperature is either more than 80, or either equal to or less than 70, otherwise it should return <code>true</code>.<br><br> This exercise is all about proper use of conditionals and logical comparison.<br><br>In use here: <br>Conditionals: if, else if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>checktemp(90)</code> -> Output: false",
-        starter: "function checktemp(temp) {\n  // Your code here\n  \n}",
+        starter: "function checktemp(temp) {\n  // Your code in the line below\n  \n}",
         functionName: "checktemp",
         tests: [
           { input: [81], expected: false },
@@ -146,8 +151,8 @@
       {
         id: 4,
         title: "Sum from 1 to N",
-        description: "Write a function <code>triangular(n)</code> that when given a variable <code>n</code>, returns the sum of the numbers from 1 to <code>n</code> (Known a triangular number).<br><br> You are going to need loops for this one, the idea is similar to the exercise we did to get the cube of a number.<br><br>In use here: <br>Loops: for(let i = 0; i < [number of loops you want]; i++) {}<br>Variable Assignment: =<br>Math Operators: +, -, *, /<br><br>Example: <code>triangular(3)</code> -> Output: 6",        starter: "function reverseString(str) {\n  // Your code here\n  return str.split('').reverse().join('');\n}",
-        starter: "function triangular(n) {\n  // Your code here\n  \n}",
+        description: "Write a function <code>triangular(n)</code> that when given a variable <code>n</code>, returns the sum of the numbers from 1 to <code>n</code>.<br><br>You are going to need to use a loop for this one. If you remember, inside of a loop we have the line <code>let i = 0</code>, this <code>i</code> counts how many loops are made, you can use that to get the sum from 1 to <code>n</code>.<br><br>In use here: <br>Loops: for(let i = 0; i < [number of loops you want]; i++) {}<br>Variable Assignment: =<br>Math Operators: +, -, *, /<br><br>Example: <code>triangular(3)</code> -> Output: 6",        starter: "function reverseString(str) {\n  // Your code in the line below\n  \n}",
+        starter: "function triangular(n) {\n  // Your code in the line below\n  \n}",
         functionName: "triangular",
         tests: [
           { input: [4], expected: 10 },
